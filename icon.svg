@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- TillTally icon: a till drawer with a coin and tally marks. Hand-drawn shapes, no external art. -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="#14532d"/>
+  <!-- drawer body -->
+  <rect x="86" y="196" width="340" height="180" rx="20" fill="#f5f0e1"/>
+  <!-- drawer handle -->
+  <rect x="196" y="266" width="120" height="22" rx="11" fill="#14532d"/>
+  <!-- coin slots -->
+  <circle cx="150" cy="238" r="14" fill="#d9a441"/>
+  <circle cx="256" cy="238" r="14" fill="#d9a441"/>
+  <circle cx="362" cy="238" r="14" fill="#d9a441"/>
+  <!-- coin above -->
+  <circle cx="256" cy="118" r="52" fill="#d9a441"/>
+  <circle cx="256" cy="118" r="38" fill="#e9bc63"/>
+  <text x="256" y="136" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#14532d" text-anchor="middle">$</text>
+  <!-- tally marks below -->
+  <g stroke="#f5f0e1" stroke-width="14" stroke-linecap="round">
+    <line x1="176" y1="416" x2="176" y2="452"/>
+    <line x1="208" y1="416" x2="208" y2="452"/>
+    <line x1="240" y1="416" x2="240" y2="452"/>
+    <line x1="272" y1="416" x2="272" y2="452"/>
+    <line x1="162" y1="452" x2="286" y2="416"/>
+  </g>
+</svg>

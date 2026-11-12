@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TillTally</title>
+  <meta name="theme-color" content="#14532d">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header>
+    <h1>TillTally</h1>
+    <p id="sync-status" class="sync-status">Local only</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="till" role="tab">Till</button>
+    <button class="tab" data-tab="spend" role="tab">Spend</button>
+    <button class="tab" data-tab="bills" role="tab">Bills</button>
+    <button class="tab" data-tab="settings" role="tab">Settings</button>
+  </nav>
+
+  <main>
+    <!-- TILL -->
+    <section id="tab-till" class="panel active">
+      <div class="combined-card">
+        <span class="label">Available to spend — combined</span>
+        <span id="combined-amount" class="big-amount">$0.00</span>
+      </div>
+      <div id="fund-cards" class="fund-cards"></div>
+
+      <h2>Add a paycheck</h2>
+      <form id="paycheck-form" class="card-form">
+        <label>Whose paycheck
+          <select id="paycheck-person"></select>
+        </label>
+        <label>Amount
+          <input id="paycheck-amount" type="number" inputmode="decimal" step="0.01" min="0.01" required placeholder="850.00">
+        </label>
+        <label>Date received
+          <input id="paycheck-date" type="date" required>
+        </label>
+        <label>Next paycheck date (optional)
+          <input id="paycheck-next" type="date">
+        </label>
+        <button type="submit">Add paycheck</button>
+      </form>
+
+      <h2>Activity</h2>
+      <ul id="activity-list" class="list"></ul>
+    </section>
+
+    <!-- SPEND -->
+    <section id="tab-spend" class="panel">
+      <h2>Log a spend</h2>
+      <form id="spend-form" class="card-form">
+        <label>Amount
+          <input id="spend-amount" type="number" inputmode="decimal" step="0.01" min="0.01" required placeholder="42.00">
+        </label>
+        <label>Note
+          <input id="spend-note" type="text" placeholder="Groceries">
+        </label>
+        <label>Category
+          <select id="spend-category"></select>
+        </label>
+        <label>Comes out of
+          <select id="spend-person"></select>
+        </label>
+        <label>Date
+          <input id="spend-date" type="date" required>
+        </label>
+        <button type="submit">Log spend</button>
+      </form>
+
+      <h2>Categories</h2>
+      <ul id="category-list" class="list"></ul>
+      <form id="category-form" class="inline-form">
+        <input id="category-name" type="text" placeholder="New category" required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <!-- BILLS -->
+    <section id="tab-bills" class="panel">
+      <div class="combined-card">
+        <span class="label">Due before the next paycheck</span>
+        <span id="bills-summary" class="big-amount">0 bills · $0.00</span>
+        <span id="bills-summary-note" class="label"></span>
+      </div>
+
+      <h2>Set up an automatic bill</h2>
+      <form id="bill-form" class="card-form">
+        <label>Name
+          <input id="bill-name" type="text" required placeholder="Electric">
+        </label>
+        <label>Amount
+          <input id="bill-amount" type="number" inputmode="decimal" step="0.01" min="0.01" required placeholder="95.00">
+        </label>
+        <label>Category
+          <select id="bill-category"></select>
+        </label>
+        <label>Comes out of
+          <select id="bill-person"></select>
+        </label>
+        <label>How often
+          <select id="bill-frequency">
+            <option value="weekly">Weekly</option>
+            <option value="biweekly">Every 2 weeks</option>
+            <option value="monthly" selected>Monthly</option>
+          </select>
+        </label>
+        <label>First due date
+          <input id="bill-first-due" type="date" required>
+        </label>
+        <button type="submit">Add bill</button>
+      </form>
+
+      <h2>Your bills</h2>
+      <ul id="bill-list" class="list"></ul>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" class="panel">
+      <h2>Fund names</h2>
+      <form id="labels-form" class="card-form">
+        <label>Person 1 <input id="label-1" type="text" required></label>
+        <label>Person 2 <input id="label-2" type="text" required></label>
+        <button type="submit">Save names</button>
+      </form>
+
+      <h2>Shared household sync</h2>
+      <p class="hint">
+        Both phones entering the same household code share one set of numbers.
+        Leave the Worker URL empty to keep this device in local-only mode.
+        See the README for the free Cloudflare deploy steps.
+      </p>
+      <form id="sync-form" class="card-form">
+        <label>Worker URL
+          <input id="sync-url" type="url" placeholder="https://tilltally-api.you.workers.dev">
+        </label>
+        <label>Household code
+          <input id="sync-code" type="text" placeholder="e.g. K7QX42">
+        </label>
+        <button type="submit">Save &amp; connect</button>
+      </form>
+      <div class="inline-form">
+        <button id="create-household" type="button">Create a new household code</button>
+        <button id="sync-now" type="button">Sync now</button>
+      </div>
+      <p id="sync-detail" class="hint"></p>
+
+      <h2>About</h2>
+      <p class="hint">
+        TillTally version <span id="app-version">—</span>. Updates arrive
+        automatically when the app is opened — no reinstall needed; this
+        version line changes when a new one lands.
+      </p>
+    </section>
+  </main>
+
+  <script src="./config.js"></script>
+  <script src="./core.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
