@@ -16,7 +16,11 @@ const SHELL = [
   "./core.js",
   "./app.js",
   "./manifest.webmanifest",
-  "./icon.svg"
+  "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon-maskable-512.png",
+  "./icon-180.png"
 ];
 
 self.addEventListener("install", (event) => {
