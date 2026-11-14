@@ -33,7 +33,7 @@ STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
 # Stage a clean copy of just the static frontend.
-for f in index.html app.js core.js config.js styles.css manifest.webmanifest sw.js icon.svg; do
+for f in index.html app.js core.js config.js styles.css manifest.webmanifest sw.js icon.svg icon-192.png icon-512.png icon-maskable-512.png icon-180.png; do
   cp "$ROOT/$f" "$STAGE/$f"
 done
 
